@@ -1,4 +1,4 @@
-# fillpoly
+# Pipeline
 Pipeline para computacao grafica
 
 Implementado em C++ usando ImGui.
