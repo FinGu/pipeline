@@ -147,25 +147,21 @@ void scene::fillpoly_process_points_x(fillpoly_block& intersections, draw_buffer
 
             int cur_y = p1.v.y;
 
-            /*if (cur_y < cam.vmin || cur_y >= cam.vmax) {
-                continue;
-            }*/
+            int limit = std::min((double)ceil(p2.v.x), (double)cam.umax);
 
-            for(int cur_x = ceil(p1.v.x); cur_x < ceil(p2.v.x); ++cur_x){
+            for(int cur_x = ceil(p1.v.x); cur_x < limit; ++cur_x){
                 vec normalized_n = cur_n.normalize();
+                
+                int cur_x_res = cur_x - cam.umin;
+                int cur_y_res = cur_y - cam.vmin;
 
-                //if(cur_x < cam.umax && cur_x >= cam.umin){
-                    int cur_x_res = cur_x - cam.umin;
-                    int cur_y_res = cur_y - cam.vmin;
+                if(cur_z < buf.z_buffer[cur_x_res + cur_y_res * width]){
+                    auto col = get_color_of_point(mat, centroid, normalized_n);
 
-                    if(cur_z < buf.z_buffer[cur_x_res + cur_y_res * width]){
-                        auto col = get_color_of_point(mat, centroid, normalized_n);
+                    buf.image_buffer[cur_x_res + cur_y_res * width] = col;
 
-                        buf.image_buffer[cur_x_res + cur_y_res * width] = col;
-
-                        buf.z_buffer[cur_x_res + cur_y_res * width] = cur_z;
-                    }
-                //}
+                    buf.z_buffer[cur_x_res + cur_y_res * width] = cur_z;
+                }
 
                 cur_z += tz;
 
