@@ -551,8 +551,7 @@ int main(int, char**){
 
     scn.set_scene_light({
         .pos = {30, 40, 150},
-        .col = {1, 1, 1, 1},
-        .brightness = 1
+        .col = {1, 1, 1, 1}
     });
 
     scn.set_ambient_light({1,1,1,1});
