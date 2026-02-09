@@ -56,7 +56,7 @@ color scene::get_color_of_point(material mat, vec centroid, vec n){
 
         max_or_zero(vecH);
 
-        ls = this->slight.col * mat.ks * std::pow(n.dprod(vecH), this->slight.brightness);
+        ls = this->slight.col * mat.ks * std::pow(n.dprod(vecH), mat.n);
     } else{
         auto vecR = n.sprod( vecL.sprod(2).dprod(n)) - vecL;
 

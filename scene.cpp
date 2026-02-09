@@ -284,10 +284,6 @@ void scene::set_scene_light_col(color col){
     this->slight.col = col;
 }
 
-void scene::set_scene_light_brightness(float n){
-    this->slight.brightness = n;
-}
-
 void scene::set_ambient_light(color c){
     this->ambient_light = c;
 }

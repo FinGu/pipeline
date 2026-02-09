@@ -148,7 +148,7 @@ void imgui_opengl_uninit(){
     ImGui::DestroyContext();
 }
 
-void render_mat_opt(object &obj){
+void render_mat_opt(object &obj, bool phong_enabled){
     if(ImGui::ColorEdit4("Setar Ka", ka)){
         obj.mat.ka = ka;
     }
@@ -160,6 +160,8 @@ void render_mat_opt(object &obj){
     if(ImGui::ColorEdit4("Setar Ks", ks)){
         obj.mat.ks = ks;
     }
+
+    if(phong_enabled && ImGui::InputFloat("Brilho (n)", &obj.mat.n)){}
 }
 
 void render_ops(scene &scene){
@@ -245,7 +247,7 @@ void render_ops(scene &scene){
 
     ImGui::NewLine();
 
-    render_mat_opt(object);
+    render_mat_opt(object, scene.phong_enabled);
 }
 
 void render_list(scene &scene){
@@ -371,8 +373,6 @@ void draw_scene_config_menu(scene &scene){
             scene.slight.col.a
         };
 
-        float n = scene.slight.brightness;
-        
         if(ImGui::InputInt3("Posicao", pos_light_scene)){
             scene.set_scene_light_pos({
                 (float)pos_light_scene[0], 
@@ -384,13 +384,7 @@ void draw_scene_config_menu(scene &scene){
         if(ImGui::ColorEdit4("Cor", color_light_scene)){
             scene.set_scene_light_col(color_light_scene);
         }
-
-        ImGui::NewLine();
-
-        if(phong_enabled && ImGui::InputFloat("Brilho (n)", &n)){
-            scene.set_scene_light_brightness(n);
-        }
-   
+           
         ImGui::EndPopup();
     }
 

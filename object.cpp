@@ -80,6 +80,8 @@ cube make_cube(scene &scene, color col, float size){
 
     cb.mat.ka = col;
 
+    cb.mat.n = 50.f;
+
     return cb;
 }
 

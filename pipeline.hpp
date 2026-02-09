@@ -107,7 +107,6 @@ struct camera{
 struct scene_light{
     vec pos;
     color col;
-    float brightness; //^n
 };
 
 struct vec_with_color{
@@ -147,7 +146,6 @@ struct scene{
 
     void set_scene_light_pos(vec pos);
     void set_scene_light_col(color col);
-    void set_scene_light_brightness(float n);
 
     void set_scene_light(scene_light s);
 
